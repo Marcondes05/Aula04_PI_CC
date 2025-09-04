@@ -1,0 +1,26 @@
+{
+  "name": "aula04_pi_cc",
+  "version": "1.0.0",
+  "description": "Aula 04 Programação para Internet II",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marcondes05/Aula04_PI_CC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Marcondes05/Aula04_PI_CC/issues"
+  },
+  "homepage": "https://github.com/Marcondes05/Aula04_PI_CC#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
+  }
+}
