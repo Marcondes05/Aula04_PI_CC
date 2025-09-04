@@ -24,10 +24,12 @@ const gameSchema = new mongoose.Schema(
             minlength: [2, "Plataforma muito curto"],
             maxlength: [100, "Plataforma muito longo"]
         },
+        // substitua a propriedade lancamento atual por algo assim:
         lancamento: {
-        type: String,
+        type: Number,
         required: [true, "Esse campo é obrigatório"],
-        match: [/^\d{4}$/, "Ano inválido (use formato YYYY)"]
+        min: [1900, "Ano inválido, mínimo 1900"],
+        max: [new Date().getFullYear(), `Ano inválido, máximo ${new Date().getFullYear()}`]
         }
 
     },

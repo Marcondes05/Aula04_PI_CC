@@ -33,13 +33,9 @@ const uri =
   MONGODB_URI ||
   `mongodb+srv://${USER}:${PASS}@atividadepratica.imqkvm5.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
 
-// 🔹 Conexão com banco + start servidor
-mongoose
-  .connect(uri)
-  .then(() => {
-    app.listen(PORT || 3000, () =>
-      console.log(`✅ Servidor rodando em http://localhost:${PORT || 3000}`)
-    );
-    console.log("✅ Conectado ao MongoDB Atlas");
-  })
-  .catch((err) => console.error("❌ Erro ao conectar no MongoDB:", err));
+const conectaDB = require("./db");
+
+conectaDB().then(() => {
+  app.listen(PORT || 3000, () => console.log(`Servidor rodando...`));
+});
+
