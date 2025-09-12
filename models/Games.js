@@ -1,40 +1,39 @@
-//.models/Games.js
-
-//Criar um schema para um Game
-
+// Schema para o modelo de games
 const mongoose = require('mongoose');
 
-const gameSchema = new mongoose.Schema(
+const gamesSchema = new mongoose.Schema(
     {
         titulo: {
             type: String,
-            require: [true, "Esse Campo é Obrigatório"],
-            minlength: [2, "Nome muito curto"],
-            maxlength: [100, "Nome muito longo"]
+            required: [true, "Este campo é obrigatório"],
+            minlength: [3, "O titulo deve ter pelo menos 3 caracteres"],
+            maxlength: [100, "O titulo deve ter no máximo 100 caracteres"],
         },
         genero: {
             type: String,
-            require: [true, "Esse Campo é Obrigatório"],
-            minlength: [2, "Gênero muito curto"],
-            maxlength: [100, "Gênero muito longo"]
+            required: [true, "Este campo é obrigatório"],
+            minlength: [3, "O genero deve ter pelo menos 3 caracteres"],
+            maxlength: [100, "O genero deve ter no máximo 100 caracteres"],
         },
         plataforma: {
             type: String,
-            require: [true, "Esse Campo é Obrigatório"],
-            minlength: [2, "Plataforma muito curto"],
-            maxlength: [100, "Plataforma muito longo"]
+            required: [true, "Este campo é obrigatório"],
+            minlength: [2, "A plataforma deve ter pelo menos 3 caracteres"],
+            maxlength: [100, "A plataforma deve ter no máximo 100 caracteres"],
         },
-        // substitua a propriedade lancamento atual por algo assim:
         lancamento: {
-        type: Number,
-        required: [true, "Esse campo é obrigatório"],
-        min: [1900, "Ano inválido, mínimo 1900"],
-        max: [new Date().getFullYear(), `Ano inválido, máximo ${new Date().getFullYear()}`]
+            type: Number,
+            required: [true, "Este campo é obrigatório"],
+            min: [0, "O lancamento mínimo é 0"],
+            max: [150, "lancamento inválido"],
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now,
         }
-
     },
     { versionKey: false }
 );
 
-const Game = mongoose.model("Game", gameSchema);
-module.exports = Game;
+const games = mongoose.model('games', gamesSchema);
+module.exports = games;

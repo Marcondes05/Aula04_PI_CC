@@ -1,41 +1,22 @@
-require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+const dotenv = require("dotenv");
+const connectDB = require("./db");
 
-const gameRoutes = require("./routes/gameRoutes");
-const errorHandler = require("./middlewares/errorHandler");
-const logger = require("./middlewares/logger");
+const port = 3000;
+
+dotenv.config();
 
 const app = express();
+app.use(express.json())
 
-// 🔹 Middlewares globais
-app.use(express.json());
-app.use(cors());
-app.use(logger);
+connectDB();
 
-// 🔹 Health-check
 app.get("/", (req, res) => {
-  res.json({ status: "API rodando 🚀" });
+  res.json({message: "Hello World!"});
 });
 
-// 🔹 Rotas agrupadas
-app.use("/games", gameRoutes);
+app.use('/games', require('./routes/gamesRoute'));
 
-// 🔹 Middleware de erros (sempre por último)
-app.use(errorHandler);
-
-// 🔹 Configurações de ambiente
-const { MONGODB_URI, USER, PASS, DB_NAME, PORT } = process.env;
-
-// Se existir MONGODB_URI, usa direto; senão monta com USER + PASS
-const uri =
-  MONGODB_URI ||
-  `mongodb+srv://${USER}:${PASS}@atividadepratica.imqkvm5.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
-
-const conectaDB = require("./db");
-
-conectaDB().then(() => {
-  app.listen(PORT || 3000, () => console.log(`Servidor rodando...`));
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
-
